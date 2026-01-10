@@ -38,4 +38,34 @@ public class ExampleWebTest extends BaseTest {
         String pageSource = DriverFactory.getDriver().getPageSource();
         Assert.assertTrue(pageSource.contains("Example Domain"));
     }
+
+    @Test
+    public void shouldHaveNonEmptyTitle() {
+        String title = DriverFactory.getDriver().getTitle();
+        Assert.assertFalse(title.isEmpty());
+    }
+
+    @Test
+    public void shouldContainIanaLink() {
+        String pageSource = DriverFactory.getDriver().getPageSource();
+        Assert.assertTrue(pageSource.contains("https://www.iana.org/domains/example"));
+    }
+
+    @Test
+    public void shouldContainMoreInformationText() {
+        String pageSource = DriverFactory.getDriver().getPageSource();
+        Assert.assertTrue(pageSource.contains("More information"));
+    }
+
+    @Test
+    public void shouldHaveBodyTag() {
+        String pageSource = DriverFactory.getDriver().getPageSource();
+        Assert.assertTrue(pageSource.toLowerCase().contains("<body"));
+    }
+
+    @Test
+    public void shouldContainDomainWord() {
+        String pageSource = DriverFactory.getDriver().getPageSource();
+        Assert.assertTrue(pageSource.contains("domain"));
+    }
 }
