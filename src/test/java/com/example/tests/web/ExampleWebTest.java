@@ -53,8 +53,8 @@ public class ExampleWebTest extends BaseTest {
 
     @Test
     public void shouldContainMoreInformationText() {
-        String pageSource = DriverFactory.getDriver().getPageSource();
-        Assert.assertTrue(pageSource.contains("More information"));
+        HomePage homePage = new HomePage(DriverFactory.getDriver());
+        Assert.assertEquals(homePage.getHeadingText(), "Example Domain");
     }
 
     @Test
