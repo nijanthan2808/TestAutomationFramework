@@ -24,4 +24,16 @@ public class ExampleWebTest extends BaseTest {
     public void shouldSkipExample() {
         throw new SkipException("Intentional skip for Extent report demo.");
     }
+
+    @Test
+    public void shouldHaveExpectedTitle() {
+        String title = DriverFactory.getDriver().getTitle();
+        Assert.assertEquals(title, "Example Domain");
+    }
+
+    @Test
+    public void shouldContainExampleText() {
+        String pageSource = DriverFactory.getDriver().getPageSource();
+        Assert.assertTrue(pageSource.contains("Example Domain"));
+    }
 }
