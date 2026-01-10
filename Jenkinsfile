@@ -19,13 +19,23 @@ pipeline {
             steps {
                 sh 'chmod +x mvnw'
                 sh './mvnw -B test'
+                script {
+                    def results = junit(testResults: 'target/surefire-reports/*.xml')
+                    def total = results.totalCount
+                    def failed = results.failCount
+                    def skipped = results.skipCount
+                    def passed = total - failed - skipped
+                    def passRate = total == 0 ? 0 : (passed * 100.0 / total)
+                    if (passRate < 75.0) {
+                        error("Pass rate ${String.format('%.2f', passRate)}% is below 75%")
+                    }
+                }
             }
         }
     }
 
     post {
         always {
-            junit 'target/surefire-reports/*.xml'
             archiveArtifacts artifacts: 'target/extent-report/*.html', allowEmptyArchive: true
         }
     }
