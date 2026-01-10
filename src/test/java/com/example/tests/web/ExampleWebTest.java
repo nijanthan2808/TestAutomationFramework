@@ -17,7 +17,9 @@ public class ExampleWebTest extends BaseTest {
 
     @Test
     public void shouldFailExample() {
-        Assert.fail("Intentional failure for Extent report demo.");
+        String actualTitle = DriverFactory.getDriver().getTitle();
+        Assert.assertEquals(actualTitle, "Not Example Domain",
+            "Intentional failure for Extent report demo.");
     }
 
     @Test
