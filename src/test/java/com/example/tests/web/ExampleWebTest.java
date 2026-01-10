@@ -15,7 +15,7 @@ public class ExampleWebTest extends BaseTest {
         Assert.assertEquals(homePage.getHeadingText(), "Example Domain");
     }
 
-    @Test(enabled = false)
+    @Test
     public void shouldFailExample() {
         Assert.fail("Intentional failure for Extent report demo.");
     }
