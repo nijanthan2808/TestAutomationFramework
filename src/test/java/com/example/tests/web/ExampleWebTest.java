@@ -22,10 +22,6 @@ public class ExampleWebTest extends BaseTest {
             "Intentional failure for Extent report demo.");
     }
 
-    @Test
-    public void shouldSkipExample() {
-        throw new SkipException("Intentional skip for Extent report demo.");
-    }
 
     @Test
     public void shouldHaveExpectedTitle() {
