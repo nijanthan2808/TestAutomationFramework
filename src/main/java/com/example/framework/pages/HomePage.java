@@ -4,7 +4,6 @@ import com.example.framework.reporting.TestLogger;
 import com.example.framework.utils.Waits;
 
 import java.time.Duration;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;

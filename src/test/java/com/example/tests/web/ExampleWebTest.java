@@ -5,11 +5,8 @@ import com.example.framework.core.DriverFactory;
 import com.example.framework.pages.HomePage;
 import com.example.framework.reporting.TestLogger;
 
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import org.testng.SkipException;
-import java.lang.Thread;
 
 public class ExampleWebTest extends BaseTest {
 
