@@ -15,4 +15,11 @@ public final class Waits {
         return new WebDriverWait(driver, timeout)
             .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
+    public static WebElement clickable(WebDriver driver, By locator, Duration timeout) {
+        Waits.visible(driver, locator, timeout);
+        return new WebDriverWait(driver, timeout)   
+        .until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
 }

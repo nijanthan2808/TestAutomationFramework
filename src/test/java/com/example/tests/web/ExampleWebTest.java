@@ -3,65 +3,40 @@ package com.example.tests.web;
 import com.example.framework.core.BaseTest;
 import com.example.framework.core.DriverFactory;
 import com.example.framework.pages.HomePage;
+import com.example.framework.reporting.TestLogger;
+
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.SkipException;
+import java.lang.Thread;
 
 public class ExampleWebTest extends BaseTest {
 
     @Test
-    public void shouldLoadHomePage() {
+    public void verifyTitleTest() {
+        TestLogger.info("Verify page title contains expected text");
+        String title = DriverFactory.getDriver().getPageSource();
+        Assert.assertTrue(title.contains("Learn and Practice Automation | automateNow"));
+    }
+
+    @Test
+    public void formFieldsTest() throws InterruptedException{
         HomePage homePage = new HomePage(DriverFactory.getDriver());
-        Assert.assertEquals(homePage.getHeadingText(), "Example Domain");
-    }
-
-    @Test
-    public void shouldFailExample() {
-        String actualTitle = DriverFactory.getDriver().getTitle();
-        Assert.assertEquals(actualTitle, "Not Example Domain",
-            "Intentional failure for Extent report demo.");
-    }
-
-
-    @Test
-    public void shouldHaveExpectedTitle() {
-        String title = DriverFactory.getDriver().getTitle();
-        Assert.assertEquals(title, "Example Domain");
-    }
-
-    @Test
-    public void shouldContainExampleText() {
-        String pageSource = DriverFactory.getDriver().getPageSource();
-        Assert.assertTrue(pageSource.contains("Example Domain"));
-    }
-
-    @Test
-    public void shouldHaveNonEmptyTitle() {
-        String title = DriverFactory.getDriver().getTitle();
-        Assert.assertFalse(title.isEmpty());
-    }
-
-    @Test
-    public void shouldContainIanaLink() {
-        String pageSource = DriverFactory.getDriver().getPageSource();
-        Assert.assertTrue(pageSource.contains("https://www.iana.org/domains/example"));
-    }
-
-    @Test
-    public void shouldContainMoreInformationText() {
-        HomePage homePage = new HomePage(DriverFactory.getDriver());
-        Assert.assertEquals(homePage.getHeadingText(), "Example Domain");
-    }
-
-    @Test
-    public void shouldHaveBodyTag() {
-        String pageSource = DriverFactory.getDriver().getPageSource();
-        Assert.assertTrue(pageSource.toLowerCase().contains("<body"));
-    }
-
-    @Test
-    public void shouldContainDomainWord() {
-        String pageSource = DriverFactory.getDriver().getPageSource();
-        Assert.assertTrue(pageSource.contains("domain"));
+        homePage.clickFormFields();
+        TestLogger.info("Verify Form Fields heading");
+        Assert.assertEquals(homePage.getHeadingText(),"Form Fields");
+        homePage.enterName("Niju");
+        homePage.enterPassword("niju123");
+        homePage.selectFavouriteDrink();
+        homePage.selectFavouriteColor();
+        homePage.selectAutomationDropDown("Yes");
+        homePage.enterEmail("niju@test.com");
+        homePage.enterMessage("Test");
+        homePage.clickSubmit();
+        TestLogger.info("Verify alert and accept");
+        homePage.verifyAlertText("Message received!");
+        homePage.acceptAlert();
+        
     }
 }
